@@ -1,0 +1,5 @@
+label {{ name }}
+    kernel /vmlinuz
+    initrd /initramfs
+    fdtdir /dtb
+    append root=live:bzz://{{ hash }} consoleblank=0 crashkernel=auto no_timer_check console=tty1 console=ttyS0,115200n systemd.show_status=true 

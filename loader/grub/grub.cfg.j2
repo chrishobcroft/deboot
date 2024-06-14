@@ -1,0 +1,22 @@
+{% for entry in entries %}
+menuentry "{{entry.desc}}" --class swarm --class deboot --id {{entry.id}} {
+  search.fs_label DEBOOT root
+  echo "Loading kernel..."
+  linux /vmlinuz root=live:bzz://{{entry.id}} console=ttyS0 console=tty1 panic=1
+  echo "Loading initramfs..."
+  initrd /initramfs
+}
+{% endfor %}
+
+
+menuentry "(local boot) Locally built appliance" --class swarm --class deboot --id 'local' {
+  search.fs_label DEBOOT root
+  echo "Loading kernel..."
+  linux /vmlinuz root=live:LABEL=DEBOOT console=ttyS0 console=tty1 panic=1
+  echo "Loading initramfs..."
+  initrd /initramfs
+}
+
+menuentry "UEFI Firmware setup" {
+  fwsetup
+}
